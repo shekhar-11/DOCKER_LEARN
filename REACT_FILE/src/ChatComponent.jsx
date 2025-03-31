@@ -48,14 +48,14 @@ const ChatComponent = () => {
 
   return (
     <div className="flex flex-col h-screen bg-gray-100">
-      {/* Header */}
+      {/* Header*/}
       <div className="bg-white shadow-sm py-4 px-6 border-b">
         <h1 className="text-xl font-semibold text-gray-800">Chat Bot</h1>
       </div>
-      
+       
       {/* Chat container */}
-      <div className="flex-1 flex justify-center items-stretch bg-gray-200">
-        <div className="w-4/5 max-w-4xl bg-white p-4 rounded-lg shadow-lg h-full flex flex-col">
+      <div className="flex-1 flex justify-center items-stretch bg-black">
+        <div className="w-11/12 max-w-4xl bg-gray-800  p-4 rounded-lg shadow-lg h-full flex flex-col">
           <div className="overflow-y-auto flex-1 space-y-2" style={{ maxHeight: 'calc(100% - 80px)', overflowY: 'hidden' }}>
             {messages.length === 0 ? (
               <div className="flex items-center justify-center h-full">
@@ -67,22 +67,23 @@ const ChatComponent = () => {
             ) : (
               messages.map(message => (
                 <div 
-                  key={message.id} 
-                  className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                key={message.id} 
+                className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
+                <div 
+                  className={`max-w-md px-4 py-3 rounded-lg inline-block break-words ${
+                    message.sender === 'user' 
+                      ? 'bg-green-600 text-white rounded-br-none ml-2' 
+                      : 'bg-gray-700  text-white rounded-bl-none shadow mr-2'
+                  }`}
                 >
-                  <div 
-                    className={`max-w-md px-4 py-3 rounded-lg w-full ${
-                      message.sender === 'user' 
-                        ? 'bg-blue-500 text-white rounded-br-none ml-2' 
-                        : 'bg-white text-gray-800 rounded-bl-none shadow mr-2'
-                    }`}
-                  >
-                    <p>{message.text}</p>
-                    <p className={`text-xs mt-1 ${message.sender === 'user' ? 'text-blue-100' : 'text-gray-500'}`}>
-                      {message.timestamp}
-                    </p>
-                  </div>
+                  <p className="break-words">{message.text}</p>
+                  <p className={`text-xs mt-1 ${message.sender === 'user' ? 'text-blue-100' : 'text-gray-500'}`}>
+                    {message.timestamp}
+                  </p>
                 </div>
+              </div>
+              
               ))
             )}
             
@@ -102,14 +103,14 @@ const ChatComponent = () => {
           </div>
           
           {/* Input area */}
-          <div className="bg-white border-t p-4">
+          <div className="bg-white border-t rounded-xl p-4">
             <form onSubmit={handleSubmit} className="flex space-x-2">
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Type your message..."
-                className="flex-1 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mx-2"
+                className=" flex-1 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mx-2"
               />
               <button
                 type="submit"
@@ -117,7 +118,7 @@ const ChatComponent = () => {
                 className={`rounded-full p-2 ${
                   isProcessing || !input.trim() 
                     ? 'bg-gray-300 text-gray-500' 
-                    : 'bg-blue-500 text-white hover:bg-blue-600'
+                    : 'bg-green-600 text-white hover:bg-blue-600'
                 } transition-colors`}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
